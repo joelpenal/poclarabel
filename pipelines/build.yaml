@@ -5,3 +5,13 @@ stages:
 - stage: build_pipeline
   pool:
     vmImage: 'ubuntu-latest'
+
+
+  jobs:
+  - job:
+    steps:
+
+    - task: Docker@2
+      inputs:
+        command: 'build'
+        Dockerfile: '**/Dockerfile'
