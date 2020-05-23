@@ -1,0 +1,7 @@
+trigger:
+- master
+
+stages:
+- stage: build_pipeline
+  pool:
+    vmImage: 'ubuntu-latest'
