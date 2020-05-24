@@ -33,14 +33,14 @@ stages:
     - task: PublishTestResults@2
       displayName: Publish unit test
       inputs:
-        testResultsFormat: 'VSTest'
-        testResultsFiles: '**/TEST-*.xml'
+        testResultsFormat: 'JUnit'
+        testResultsFiles: '**/*-results.xml'
         testRunTitle: 'Publish Test results'
 
     - task: PublishCodeCoverageResults@1
       inputs:
         codeCoverageTool: 'Cobertura'
-        summaryFileLocation: '**/*-coverage.*'
+        summaryFileLocation: '**/*-coverage.xml'
 
     - task: Docker@2
       displayName: Build an image

@@ -6,8 +6,7 @@
 >
 	<logging>
 		  <log type="coverage-clover" target="clover-coverage.xml"/>
-		  <log type="coverage-php" target="php-coverage.serialized"/>
-		  <log type="junit" target="TEST-Results.xml"/>>
+		  <log type="junit" target="junit-results.xml"/>>
     </logging>
     <testsuites>
         <testsuite name="Unit">
