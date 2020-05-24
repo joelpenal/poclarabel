@@ -1,6 +1,4 @@
 /vendor
-.env
-.env.example
 *.cache
 *.log
 Thumbs.db
