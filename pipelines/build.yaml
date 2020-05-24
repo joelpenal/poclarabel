@@ -4,7 +4,7 @@ trigger:
 stages:
 - stage: build_pipeline
   pool:
-    vmImage: 'ubuntu-latest'
+    vmImage: 'Ubuntu 18.04'
 
   variables:
    imageName: 'poclarabel01repo01'
