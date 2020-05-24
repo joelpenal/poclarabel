@@ -29,3 +29,13 @@ stages:
         repository: 'poclarabel01repo01'
         command: 'push'
         tags: '$(Build.BuildNumber)'
+
+    - task: AzureRmWebAppDeployment@4
+      inputs:
+        ConnectionType: 'AzureRM'
+        azureSubscription: 'TechLlamas (edea218b-98bf-47f0-83db-83085239f770)'
+        appType: 'webAppContainer'
+        WebAppName: 'poclarabel01webapp'
+        DockerNamespace: 'poclarabel01acr01.azurecr.io'
+        DockerRepository: 'poclarabel01repo01'
+        DockerImageTag: '$(Build.BuildNumber)'
