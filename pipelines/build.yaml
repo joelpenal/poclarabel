@@ -8,7 +8,7 @@ stages:
 
   variables:
    imageName: 'poclarabel01repo01'
-   phpVersion: 7.3
+   phpVersion: 7.4
 
   jobs:
   - job:
@@ -33,7 +33,7 @@ stages:
     - task: PublishTestResults@2
       inputs:
         testResultsFormat: 'JUnit'
-        testResultsFiles: '**/TEST-*.xml'
+        testResultsFiles: '**/TEST*.xml'
         testRunTitle: 'Publish Test results'
 
     - task: ArchiveFiles@2
