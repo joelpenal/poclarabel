@@ -14,4 +14,8 @@ stages:
     - task: Docker@2
       inputs:
         command: 'build'
-        Dockerfile: '**/Dockerfile'
+        Dockerfile: 'Dockerfile'
+        buildContext: '.'
+        tags: |
+          $(Build.BuildNumber)
+          $(vOnBuildTag)
