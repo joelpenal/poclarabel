@@ -26,6 +26,6 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
 # Copy existing application directory contents
 COPY . /var/www
 
-# Expose port 8181 and start server
-CMD php artisan serve --host=0.0.0.0 --port=8181
-EXPOSE 8181
+# Expose port 8080 and start server
+CMD php artisan serve --host=0.0.0.0 --port=8080
+EXPOSE 8080
