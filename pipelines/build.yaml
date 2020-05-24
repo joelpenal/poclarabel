@@ -1,0 +1,38 @@
+trigger:
+- master
+
+stages:
+- stage: build_pipeline
+  pool:
+    vmImage: 'Ubuntu 18.04'
+
+  variables:
+   imageName: 'poclarabel01repo01'
+
+
+  jobs:
+  - job:
+    steps:
+
+    - task: Bash@3
+      displayName: Install composer
+      inputs:
+        targetType: 'inline'
+        script: 'composer install'
+
+    - task: Docker@2
+      displayName: Build an image
+      inputs:
+        containerRegistry: 'azure-acr'
+        repository: 'poclarabel01repo01'
+        command: 'build'
+        Dockerfile: 'Dockerfile'
+        tags: '$(Build.BuildNumber)'
+
+    - task: Docker@2
+      displayName: Push image
+      inputs:
+        containerRegistry: 'azure-acr'
+        repository: 'poclarabel01repo01'
+        command: 'push'
+        tags: '$(Build.BuildNumber)'
