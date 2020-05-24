@@ -8,10 +8,32 @@ stages:
 
   variables:
    imageName: 'poclarabel01repo01'
+   phpVersion: 7.3
 
   jobs:
   - job:
     steps:
+
+    - script: |
+        sudo update-alternatives --set php /usr/bin/php$(phpVersion)
+        sudo update-alternatives --set phar /usr/bin/phar$(phpVersion)
+        sudo update-alternatives --set phpdbg /usr/bin/phpdbg$(phpVersion)
+        sudo update-alternatives --set php-cgi /usr/bin/php-cgi$(phpVersion)
+        sudo update-alternatives --set phar.phar /usr/bin/phar.phar$(phpVersion)
+        php -version
+      displayName: 'Use PHP version $(phpVersion)'
+
+    - script: composer install --no-interaction --prefer-dist
+      displayName: 'composer install'
+
+    - script: phpunit
+      displayName: 'Run tests with phpunit'
+
+    - task: ArchiveFiles@2
+      inputs:
+        rootFolderOrFile: '$(system.defaultWorkingDirectory)'
+        includeRootFolder: false
+    - task: PublishBuildArtifacts@1
 
     - task: Docker@2
       displayName: Build an image
