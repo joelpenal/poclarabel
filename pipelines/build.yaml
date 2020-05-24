@@ -24,7 +24,10 @@ stages:
           $(Build.BuildNumber)
 
     - task: Docker@2
-      displayName: Docker Push
+      displayName: Push image
       inputs:
+        containerRegistry: 'azure-acr'
         repository: $(imageName)
-        command: 'push'
+        command: push
+        tags: |
+          $(Build.BuildNumber)
