@@ -30,12 +30,6 @@ stages:
       displayName: 'Run tests with phpunit'
       continueOnError: false
 
-    - task: PublishCodeCoverageResults@1
-      inputs:
-        codeCoverageTool: 'Cobertura'
-        summaryFileLocation:
-
-
     - task: PublishTestResults@2
       displayName: Publish unit test
       inputs:
