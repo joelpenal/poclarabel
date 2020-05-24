@@ -9,16 +9,9 @@ stages:
   variables:
    imageName: 'poclarabel01repo01'
 
-
   jobs:
   - job:
     steps:
-
-    - task: Bash@3
-      displayName: Install composer
-      inputs:
-        targetType: 'inline'
-        script: 'composer install'
 
     - task: Docker@2
       displayName: Build an image
