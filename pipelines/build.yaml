@@ -19,3 +19,5 @@ stages:
         tags: |
           $(Build.BuildNumber)
           $(vOnBuildTag)
+
+  
