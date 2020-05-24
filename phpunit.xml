@@ -5,12 +5,12 @@
          colors="true"
 >
 	<logging>
-		  <log type="coverage-clover" target="/tmp/coverage.xml"/>
-		  <log type="coverage-php" target="/tmp/coverage.serialized"/>
+		  <log type="coverage-clover" target="coverage.xml"/>
+		  <log type="coverage-php" target="coverage.serialized"/>
 		  <log type="coverage-text" target="php://stdout" showUncoveredFiles="false"/>
-		  <log type="junit" target="/tmp/TEST-Results.xml"/>
-		  <log type="testdox-html" target="/tmp/testdox.html"/>
-		  <log type="testdox-text" target="/tmp/testdox.txt"/>
+		  <log type="junit" target="TEST-Results.xml"/>
+		  <log type="testdox-html" target="testdox.html"/>
+		  <log type="testdox-text" target="testdox.txt"/>
     </logging>
     <testsuites>
         <testsuite name="Unit">
