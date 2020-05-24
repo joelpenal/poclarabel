@@ -30,18 +30,19 @@ stages:
       displayName: 'Run tests with phpunit'
       continueOnError: false
 
+    - task: PublishCodeCoverageResults@1
+      inputs:
+        codeCoverageTool: 'Cobertura'
+        summaryFileLocation: '$(System.DefaultWorkingDirectory)'
+        reportDirectory: '$(System.DefaultWorkingDirectory)'
+        failIfCoverageEmpty: true
+
     - task: PublishTestResults@2
+      displayName: Publish unit test
       inputs:
         testResultsFormat: 'JUnit'
         testResultsFiles: '**/TEST-*.xml'
         testRunTitle: 'Publish Test results'
-
-    - task: ArchiveFiles@2
-      inputs:
-        rootFolderOrFile: '$(system.defaultWorkingDirectory)'
-        includeRootFolder: false
-
-    - task: PublishBuildArtifacts@1
 
     - task: Docker@2
       displayName: Build an image
