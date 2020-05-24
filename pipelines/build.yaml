@@ -20,4 +20,13 @@ stages:
           $(Build.BuildNumber)
           $(vOnBuildTag)
 
+    - task: Docker@2
+      inputs:
+        containerRegistry: 'azure-acr'
+        repository: 'poclarabel01acr01.azurecr.io'
+        command: 'push'
+        tags: |
+          $(Build.BuildNumber)
+          $(vOnBuildTag)
+
   
