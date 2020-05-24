@@ -40,7 +40,7 @@ stages:
     - task: PublishCodeCoverageResults@1
       inputs:
         codeCoverageTool: 'Cobertura'
-        summaryFileLocation: '**/coverage.xml'''
+        summaryFileLocation: '**/*-coverage.*'
 
     - task: Docker@2
       displayName: Build an image

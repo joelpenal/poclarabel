@@ -5,12 +5,9 @@
          colors="true"
 >
 	<logging>
-		  <log type="coverage-clover" target="coverage.xml"/>
-		  <log type="coverage-php" target="coverage.serialized"/>
-		  <log type="coverage-text" target="php://stdout" showUncoveredFiles="false"/>
-		  <log type="junit" target="TEST-Results.xml"/>
-		  <log type="testdox-html" target="testdox.html"/>
-		  <log type="testdox-text" target="testdox.txt"/>
+		  <log type="coverage-clover" target="clover-coverage.xml"/>
+		  <log type="coverage-php" target="php-coverage.serialized"/>
+		  <log type="junit" target="TEST-Results.xml"/>>
     </logging>
     <testsuites>
         <testsuite name="Unit">
