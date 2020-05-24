@@ -33,7 +33,7 @@ stages:
     - task: PublishTestResults@2
       displayName: Publish unit test
       inputs:
-        testResultsFormat: 'JUnit'
+        testResultsFormat: 'VSTest'
         testResultsFiles: '**/TEST-*.xml'
         testRunTitle: 'Publish Test results'
 
