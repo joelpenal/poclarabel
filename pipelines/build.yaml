@@ -6,17 +6,20 @@ stages:
   pool:
     vmImage: 'ubuntu-latest'
 
+  variables:
+   imageName: 'poclarabel01repo01'
+
 
   jobs:
   - job:
     steps:
 
     - task: Docker@2
-      displayName: Docker Build
+      displayName: Build an image
       inputs:
-        command: 'build'
-        Dockerfile: 'Dockerfile'
-        buildContext: '.'
+        repository: $(imageName)
+        command: build
+        Dockerfile: Dockerfile
         tags: |
           $(Build.BuildNumber)
           $(vOnBuildTag)
@@ -24,11 +27,5 @@ stages:
     - task: Docker@2
       displayName: Docker Push
       inputs:
-        containerRegistry: 'azure-acr'
-        repository: 'poclarabel01repo01'
+        repository: $(imageName)
         command: 'push'
-        tags: |
-          $(Build.BuildNumber)
-          $(vOnBuildTag)
-
-  
