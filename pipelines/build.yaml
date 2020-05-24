@@ -38,12 +38,13 @@ stages:
         testRunTitle: 'Publish Test results'
 
     - task: PublishCodeCoverageResults@1
+      displayName: Publish Code Coverage
       inputs:
         codeCoverageTool: 'Cobertura'
         summaryFileLocation: '**/*-coverage.xml'
 
     - task: Docker@2
-      displayName: Build an image
+      displayName: Build Docker image
       inputs:
         containerRegistry: 'azure-acr'
         repository: 'poclarabel01repo01'
@@ -52,7 +53,7 @@ stages:
         tags: '$(Build.BuildNumber)'
 
     - task: Docker@2
-      displayName: Push image
+      displayName: Push Docker to ACR
       inputs:
         containerRegistry: 'azure-acr'
         repository: 'poclarabel01repo01'
@@ -60,6 +61,7 @@ stages:
         tags: '$(Build.BuildNumber)'
 
     - task: AzureRmWebAppDeployment@4
+      displayName: Deploy App
       inputs:
         ConnectionType: 'AzureRM'
         azureSubscription: 'TechLlamas (edea218b-98bf-47f0-83db-83085239f770)'
