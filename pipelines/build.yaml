@@ -34,7 +34,7 @@ stages:
       displayName: Publish unit test
       inputs:
         testResultsFormat: 'JUnit'
-        testResultsFiles: '**/TEST-*.xml'
+        testResultsFiles: 'tmp/TEST-Results.xml'
         testRunTitle: 'Publish Test results'
 
     - task: Docker@2
