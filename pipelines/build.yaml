@@ -33,9 +33,8 @@ stages:
     - task: PublishCodeCoverageResults@1
       inputs:
         codeCoverageTool: 'Cobertura'
-        summaryFileLocation: '$(System.DefaultWorkingDirectory)'
-        reportDirectory: '$(System.DefaultWorkingDirectory)'
-        failIfCoverageEmpty: true
+        summaryFileLocation:
+
 
     - task: PublishTestResults@2
       displayName: Publish unit test
