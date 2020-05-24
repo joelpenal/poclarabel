@@ -23,7 +23,7 @@ stages:
     - task: Docker@2
       inputs:
         containerRegistry: 'azure-acr'
-        repository: 'poclarabel01acr01.azurecr.io'
+        repository: 'poclarabel01repo01'
         command: 'push'
         tags: |
           $(Build.BuildNumber)
