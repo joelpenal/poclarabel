@@ -20,19 +20,24 @@ stages:
         targetType: 'inline'
         script: 'composer install'
 
-    - task: Docker@2
-      displayName: Build an image
+    - task: Bash@3
       inputs:
-        containerRegistry: 'azure-acr'
-        repository: 'poclarabel01repo01'
-        command: 'build'
-        Dockerfile: 'Dockerfile'
-        tags: '$(Build.BuildNumber)'
+        targetType: 'inline'
+        script: 'ls'
 
-    - task: Docker@2
-      displayName: Push image
-      inputs:
-        containerRegistry: 'azure-acr'
-        repository: 'poclarabel01repo01'
-        command: 'push'
-        tags: '$(Build.BuildNumber)'
+ #   - task: Docker@2
+ #     displayName: Build an image
+ #     inputs:
+ #       containerRegistry: 'azure-acr'
+ #       repository: 'poclarabel01repo01'
+ #       command: 'build'
+ #       Dockerfile: 'Dockerfile'
+ #       tags: '$(Build.BuildNumber)'
+
+#    - task: Docker@2
+#      displayName: Push image
+#      inputs:
+#        containerRegistry: 'azure-acr'
+#        repository: 'poclarabel01repo01'
+#        command: 'push'
+#        tags: '$(Build.BuildNumber)'
