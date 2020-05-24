@@ -37,6 +37,11 @@ stages:
         testResultsFiles: '**/TEST-*.xml'
         testRunTitle: 'Publish Test results'
 
+    - task: PublishCodeCoverageResults@1
+      inputs:
+        codeCoverageTool: 'Cobertura'
+        summaryFileLocation: '**/coverage.xml'''
+
     - task: Docker@2
       displayName: Build an image
       inputs:
