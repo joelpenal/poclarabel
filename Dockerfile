@@ -31,6 +31,3 @@ COPY . /var/www
 RUN composer install
 RUN composer dump-autoload
 
-# Expose port 8080 and start server
-CMD php artisan serve 
-EXPOSE 80
