@@ -24,7 +24,7 @@ stages:
       displayName: 'Use PHP version $(phpVersion)'
 
     - script: composer install --no-interaction --prefer-dist
-      displayName: 'composer install'
+      displayName: 'Install Composer'
 
     - script: phpunit
       displayName: 'Run tests with phpunit'
