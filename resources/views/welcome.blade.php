@@ -81,7 +81,7 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    Club Piscine
+                    Club Piscine Super Fitness
                 </div>
 
                 <div class="links">
