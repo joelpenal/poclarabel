@@ -12,9 +12,12 @@ general:
         - CVE-2020-12464
         - CVE-2019-20079
         - CVE-2019-20807
+        - CVE-2020-13249
+        - CVE-2019-17455
+        - CVE-2020-8492
     bestPracticeViolations:
         - DKL-DI-0005
         - CIS-DI-0005 
-        - CIS-DI-0006 
+        #- CIS-DI-0006 
         - CIS-DI-0008
         - DKL-LI-0003
