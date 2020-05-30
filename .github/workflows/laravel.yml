@@ -21,7 +21,7 @@ jobs:
       uses: Azure/container-scan@v0
       with:
         # Docker image to scan
-        image-name: poclarabel01acr01.azurecr.io/poclarabel01repo01/latest
+        image-name: poclarabel01acr01.azurecr.io/poclarabel01repo01:20200530.4
         # Username to authenticate to the Docker registry
         username: poclarabel01acr01
         # Password to authenticate to the Docker registry
