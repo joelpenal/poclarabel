@@ -1,5 +1,4 @@
 FROM php:7.3-fpm
-RUN export DOCKER_CONTENT_TRUST=1
 
 # Copy composer.lock and composer.json
 COPY composer.lock composer.json /var/www/
@@ -24,9 +23,6 @@ RUN apt-get update && apt-get install -y \
     git \
     curl \
     cron
-
-# Clear cache
-RUN rm -rf /var/lib/apt/lists/*
 
 # Install extensions
 RUN docker-php-ext-install pdo_mysql mbstring zip exif pcntl

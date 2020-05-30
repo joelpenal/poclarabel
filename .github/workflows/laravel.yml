@@ -24,7 +24,6 @@ jobs:
     - uses: Azure/container-scan@v0
       with:
         image-name: poclarabel01acr01.azurecr.io/poclarabel01repo01:0.1.0
-        severity-threshold: LOW
     
     - uses: Azure/docker-login@v1
       with:
