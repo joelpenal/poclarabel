@@ -8,24 +8,23 @@ on:
 
 jobs:
   laravel-tests:
-
-    runs-on: ubuntu-latest
-    env:
-      imagename: poclarabel01repo01
-      phpVersion: 7.4
-    
+    runs-on: ubuntu-latest    
     steps:
     - uses: actions/checkout@v2
+      env:
+        imagename: poclarabel01repo01
+        phpVersion: 7.4  
+        
     - name: Copy .env      
       run: php -r "file_exists('.env') || copy('.env.example', '.env');"
       
     - name: Use PHP version
       run: |
-        sudo update-alternatives --set php /usr/bin/php${{phpVersion}}
-        sudo update-alternatives --set phar /usr/bin/phar${{phpVersion}}
-        sudo update-alternatives --set phpdbg /usr/bin/phpdbg${{phpVersion}}
-        sudo update-alternatives --set php-cgi /usr/bin/php-cgi${{phpVersion}}
-        sudo update-alternatives --set phar.phar /usr/bin/phar.phar${{phpVersion}}
+        sudo update-alternatives --set php /usr/bin/php(phpVersion)
+        sudo update-alternatives --set phar /usr/bin/phar$(phpVersion)
+        sudo update-alternatives --set phpdbg /usr/bin/phpdbg$(phpVersion)
+        sudo update-alternatives --set php-cgi /usr/bin/php-cgi$(phpVersion)
+        sudo update-alternatives --set phar.phar /usr/bin/phar.phar$(phpVersion)
         php -version
       
     - name: Install Composer
