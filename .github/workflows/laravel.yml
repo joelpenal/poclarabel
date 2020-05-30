@@ -19,11 +19,13 @@ jobs:
     - name: Generate key
       run: php artisan key:generate
 
-    - run: docker build . -t poclarabel01acr01.azurecr.io/poclarabel01repo01:latest
+    - run: export DOCKER_CONTENT_TRUST=1  
+
+    - run: docker build . -t poclarabel01acr01.azurecr.io/poclarabel01repo01:0.1.0
       
     - uses: Azure/container-scan@v0
       with:
-        image-name: poclarabel01acr01.azurecr.io/poclarabel01repo01:latest
+        image-name: poclarabel01acr01.azurecr.io/poclarabel01repo01:0.1.0
     
     - uses: Azure/docker-login@v1
       with:
@@ -31,4 +33,4 @@ jobs:
         username: poclarabel01acr01
         password: Z50Bev3AAZ8onXqMqAF4DENaIiwmc=05
     
-    - run: docker push poclarabel01acr01.azurecr.io/poclarabel01repo01:latest
+    - run: docker push poclarabel01acr01.azurecr.io/poclarabel01repo01:0.1.0

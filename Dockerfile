@@ -25,7 +25,7 @@ RUN apt-get update && apt-get install -y \
     cron
 
 # Clear cache
-RUN apt-get update && rm -rf /var/lib/apt/lists/*
+RUN rm -rf /var/lib/apt/lists/*
 
 # Install extensions
 RUN docker-php-ext-install pdo_mysql mbstring zip exif pcntl
