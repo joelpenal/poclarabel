@@ -1,6 +1,5 @@
 FROM php:7.3-fpm
 RUN export DOCKER_CONTENT_TRUST=1
-RUN usr/bin/wall grwxr-xr-x 
 
 # Copy composer.lock and composer.json
 COPY composer.lock composer.json /var/www/
