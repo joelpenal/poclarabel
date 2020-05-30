@@ -10,22 +10,23 @@ jobs:
   laravel-tests:
     runs-on: ubuntu-latest    
     steps:
-    - uses: actions/checkout@v2
-      env:
-        imagename: poclarabel01repo01
-        phpVersion: 7.4  
-        
-   
+    - uses: actions/checkout@v2 
+
+    - run: docker build . -t poclarabel01acr01.azurecr.io/poclarabel01repo01:latest
         
     - name: Container image scan
       uses: Azure/container-scan@v0
       with:
-        # Docker image to scan
-        image-name: poclarabel01acr01.azurecr.io/poclarabel01repo01:20200530.4
-        # Username to authenticate to the Docker registry
+        image-name: poclarabel01acr01.azurecr.io/poclarabel01repo01:latest
+        
+    - uses: Azure/docker-login@v1
+      with:
+        login-server: poclarabel01acr01.azurecr.io
         username: poclarabel01acr01
-        # Password to authenticate to the Docker registry
         password: Z50Bev3AAZ8onXqMqAF4DENaIiwmc=05
+    
+    - name: Docker Push
+    - run: docker push poclarabel01acr01.azurecr.io/poclarabel01repo01:latest
 
         
       
