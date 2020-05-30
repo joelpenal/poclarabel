@@ -27,7 +27,7 @@ jobs:
     
     - uses: Azure/docker-login@v1
       with:
-        login-server: contoso.azurecr.io
+        login-server: poclarabel01acr01.azurecr.io
         username: poclarabel01acr01
         password: Z50Bev3AAZ8onXqMqAF4DENaIiwmc=05
         
