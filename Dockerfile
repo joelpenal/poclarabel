@@ -24,6 +24,14 @@ RUN apt-get update && apt-get install -y \
     curl \
     cron
 
+# Install Node
+RUN apt-get install git-core curl build-essential openssl libssl-dev \
+    && git clone https://github.com/nodejs/node.git \
+    && cd node \
+    && ./configure \
+    && make \
+    && sudo make install
+
 # Install extensions
 RUN docker-php-ext-install pdo_mysql mbstring zip exif pcntl
 RUN docker-php-ext-configure gd --with-gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ --with-png-dir=/usr/include/
@@ -38,6 +46,8 @@ RUN apt-get update -y && \
 
 # Get composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+
+
 
 # Add user for laravel application
 RUN groupadd -g 1000 www
@@ -55,3 +65,6 @@ USER www
 # Expose port 8080 and start server
 CMD php artisan serve --host=0.0.0.0 --port=8080
 EXPOSE 8080
+
+HEALTHCHECK --interval=12s --timeout=12s --start-period=30s \  
+CMD node healthcheck.js
