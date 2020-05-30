@@ -19,8 +19,6 @@ jobs:
     - name: Generate key
       run: php artisan key:generate
 
-    - run: export DOCKER_CONTENT_TRUST=1  
-
     - run: docker build . -t poclarabel01acr01.azurecr.io/poclarabel01repo01:0.1.0
       
     - uses: Azure/container-scan@v0
