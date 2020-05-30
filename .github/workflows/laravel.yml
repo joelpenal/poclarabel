@@ -1,5 +1,3 @@
-name: Laravel
-
 on:
   push:
     branches: [ master ]
@@ -8,33 +6,29 @@ on:
 
 jobs:
   laravel-tests:
-    runs-on: ubuntu-latest    
+    runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2 
-  
+    - uses: actions/checkout@master
+   
     - name: Copy .env      
       run: php -r "file_exists('.env') || copy('.env.example', '.env');"
-
+    
     - name: Install Composer
       run: composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
-      
+    
     - name: Generate key
       run: php artisan key:generate
 
     - run: docker build . -t poclarabel01acr01.azurecr.io/poclarabel01repo01:latest
-        
+      
     - uses: Azure/container-scan@v0
       with:
         image-name: poclarabel01acr01.azurecr.io/poclarabel01repo01:latest
-        
+    
     - uses: Azure/docker-login@v1
       with:
-        login-server: poclarabel01acr01.azurecr.io
+        login-server: contoso.azurecr.io
         username: poclarabel01acr01
         password: Z50Bev3AAZ8onXqMqAF4DENaIiwmc=05
     
-    - name: Docker Push
     - run: docker push poclarabel01acr01.azurecr.io/poclarabel01repo01:latest
-
-        
-      
