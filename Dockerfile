@@ -25,12 +25,9 @@ RUN apt-get update && apt-get install -y \
     cron
 
 # Install Node
-RUN apt-get install git-core curl build-essential openssl libssl-dev \
-    && git clone https://github.com/nodejs/node.git \
-    && cd node \
-    && ./configure \
-    && make \
-    && sudo make install
+RUN curl -sL https://deb.nodesource.com/setup_11.x  | bash -
+RUN apt-get -y install nodejs
+RUN npm install
 
 # Install extensions
 RUN docker-php-ext-install pdo_mysql mbstring zip exif pcntl
