@@ -1,0 +1,50 @@
+name: Laravel
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  laravel-tests:
+
+    runs-on: ubuntu-latest
+    env:
+      imagename: poclarabel01repo01
+      phpVersion: 7.4
+    
+    steps:
+    - uses: actions/checkout@v2
+    - name: Copy .env      
+      run: php -r "file_exists('.env') || copy('.env.example', '.env');"
+      
+    - name: Use PHP version
+      run: |
+        sudo update-alternatives --set php /usr/bin/php$phpVersion)
+        sudo update-alternatives --set phar /usr/bin/phar$(phpVersion)
+        sudo update-alternatives --set phpdbg /usr/bin/phpdbg$(phpVersion)
+        sudo update-alternatives --set php-cgi /usr/bin/php-cgi$(phpVersion)
+        sudo update-alternatives --set phar.phar /usr/bin/phar.phar$(phpVersion)
+        php -version
+      
+    - name: Install Composer
+      run: composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
+      
+    - name: Generate key
+      run: php artisan key:generate
+      
+    - name: Execute tests (Unit and Feature tests) via PHPUnit
+      run: vendor/bin/phpunit
+      
+    - name: Build and push Docker images
+      uses: docker/build-push-action@v1.1.0
+      with:
+        username: poclarabel01acr01
+        password: Z50Bev3AAZ8onXqMqAF4DENaIiwmc=05
+        repository: poclarabel01repo01  
+        registry: poclarabel01acr01.azurecr.io
+        dockerfile: Dockerfile
+        tags: latest
+        
+      
