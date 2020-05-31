@@ -6,10 +6,14 @@ WORKDIR /var/www
 # Copy composer.lock and composer.json
 COPY composer.lock composer.json /var/www/
 
-ENV DOCKER_CONTENT_TRUST=1
-ENV DD_AGENT_MAJOR_VERSION=7
-ENV DD_API_KEY=515a77b256d24b80642bdca4bfbd1185
-ENV DD_INSTALL_ONLY=true
+ENV DOCKER_CONTENT_TRUST=1 \
+    DD_HOSTNAME="Carrieres" \
+    DD_AGENT_MAJOR_VERSION=7 \
+    DD_LOGS_ENABLED=true \
+    DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL=true \
+    DD_AC_EXCLUDE="name:datadog-agent" \
+    DD_API_KEY=515a77b256d24b80642bdca4bfbd1185 \
+    DD_INSTALL_ONLY=true 
 
 # Install dependencies
 RUN apt-get update && apt-get install -y \
@@ -30,7 +34,7 @@ RUN apt-get update && apt-get install -y \
     cron \
     npm 
 
-RUN curl -sL https://raw.githubusercontent.com/DataDog/datadog-agent/master/cmd/agent/install_script.sh  | bash -
+RUN curl -L https://raw.githubusercontent.com/DataDog/datadog-agent/master/cmd/agent/install_script.sh  | bash -
 
 # Install Node
 #RUN curl -sL https://deb.nodesource.com/setup_14.x  | bash -
