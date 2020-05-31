@@ -6,6 +6,11 @@ COPY composer.lock composer.json /var/www/
 # Set working directory
 WORKDIR /var/www
 
+ENV DOCKER_CONTENT_TRUST=1
+
+RUN -d --name dd-agent -v /var/run/docker.sock:/var/run/docker.sock:ro -v /proc/:/host/proc/:ro -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro -e DD_API_KEY=515a77b256d24b80642bdca4bfbd1185 datadog/agent:7
+
+
 # Install dependencies
 RUN apt-get update && apt-get install -y \
     build-essential \
