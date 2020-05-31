@@ -7,11 +7,9 @@ WORKDIR /var/www
 COPY composer.lock composer.json /var/www/
 
 ENV DOCKER_CONTENT_TRUST=1 \
-    DD_HOSTNAME="Carrieres" \
     DD_AGENT_MAJOR_VERSION=7 \
     DD_LOGS_ENABLED=true \
     DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL=true \
-    DD_AC_EXCLUDE="name:datadog-agent" \
     DD_API_KEY=515a77b256d24b80642bdca4bfbd1185 \
     DD_INSTALL_ONLY=true 
 
@@ -33,8 +31,6 @@ RUN apt-get update && apt-get install -y \
     curl \
     cron \
     npm 
-
-RUN curl -L https://raw.githubusercontent.com/DataDog/datadog-agent/master/cmd/agent/install_script.sh  | bash -
 
 # Install Node
 #RUN curl -sL https://deb.nodesource.com/setup_14.x  | bash -
@@ -63,6 +59,9 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
 # Copy existing application directory contents
 COPY . /var/www
 
+# Install Datadog Agent
+RUN curl -L https://raw.githubusercontent.com/DataDog/datadog-agent/master/cmd/agent/install_script.sh  | bash -
+
 # Copy existing application directory permissions
 #COPY --chown=www:www . /var/www
 
@@ -70,8 +69,10 @@ COPY . /var/www
 #USER www
 
 # Expose port 8080 and start server
-CMD php artisan serve --host=0.0.0.0 --port=8080
-EXPOSE 8080
+CMD php artisan serve --host=0.0.0.0 --port=80
+EXPOSE 80
 
 HEALTHCHECK --interval=12s --timeout=12s --start-period=30s \  
 CMD node healthcheck.js
+
+# RUN datadog-agent start
