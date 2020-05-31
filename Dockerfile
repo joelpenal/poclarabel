@@ -1,4 +1,4 @@
-FROM php:7.3-fpm
+FROM ubuntu:18.04
 
 # Copy composer.lock and composer.json
 COPY composer.lock composer.json /var/www/
