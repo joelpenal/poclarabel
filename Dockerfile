@@ -1,16 +1,14 @@
 FROM ubuntu:18.04
 
-# Copy composer.lock and composer.json
-COPY composer.lock composer.json /var/www/
-
 # Set working directory
 WORKDIR /var/www
+
+# Copy composer.lock and composer.json
+COPY composer.lock composer.json /var/www/
 
 ENV DOCKER_CONTENT_TRUST=1
 ENV DD_AGENT_MAJOR_VERSION=7 
 ENV DD_API_KEY=515a77b256d24b80642bdca4bfbd1185
-
-RUN curl -L https://raw.githubusercontent.com/DataDog/datadog-agent/master/cmd/agent/install_script.sh | bash -
 
 # Install dependencies
 RUN apt-get update && apt-get install -y \
@@ -19,6 +17,7 @@ RUN apt-get update && apt-get install -y \
     libpng-dev \
     libzip-dev \
     zlib1g-dev \
+    libjpeg62-turbo-dev \
     libfreetype6-dev \
     locales \
     zip \
@@ -28,6 +27,8 @@ RUN apt-get update && apt-get install -y \
     git \
     curl \
     cron
+
+RUN curl -L https://raw.githubusercontent.com/DataDog/datadog-agent/master/cmd/agent/install_script.sh | bash -
 
 # Install Node
 RUN curl -sL https://deb.nodesource.com/setup_14.x  | bash -
