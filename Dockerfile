@@ -7,9 +7,10 @@ COPY composer.lock composer.json /var/www/
 WORKDIR /var/www
 
 ENV DOCKER_CONTENT_TRUST=1
+ENV DD_AGENT_MAJOR_VERSION=7 
+ENV DD_API_KEY=515a77b256d24b80642bdca4bfbd1185
 
-RUN -d --name dd-agent -v /var/run/docker.sock:/var/run/docker.sock:ro -v /proc/:/host/proc/:ro -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro -e DD_API_KEY=515a77b256d24b80642bdca4bfbd1185 datadog/agent:7
-
+RUN curl -L https://raw.githubusercontent.com/DataDog/datadog-agent/master/cmd/agent/install_script.sh | bash -
 
 # Install dependencies
 RUN apt-get update && apt-get install -y \
