@@ -1,4 +1,4 @@
-FROM ubuntu:18.04
+FROM php:7.3-fpm
 
 # Set working directory
 WORKDIR /var/www
@@ -7,11 +7,13 @@ WORKDIR /var/www
 COPY composer.lock composer.json /var/www/
 
 ENV DOCKER_CONTENT_TRUST=1
-ENV DD_AGENT_MAJOR_VERSION=7 
+ENV DD_AGENT_MAJOR_VERSION=7
 ENV DD_API_KEY=515a77b256d24b80642bdca4bfbd1185
+ENV DD_INSTALL_ONLY=true
 
 # Install dependencies
 RUN apt-get update && apt-get install -y \
+    apt-utils \
     build-essential \
     mariadb-client \
     libpng-dev \
@@ -25,27 +27,27 @@ RUN apt-get update && apt-get install -y \
     unzip \
     git \
     curl \
-    cron
+    cron \
+    npm 
 
-# Install DataDog Agent
-RUN curl -L https://raw.githubusercontent.com/DataDog/datadog-agent/master/cmd/agent/install_script.sh | bash -
+RUN curl -sL https://raw.githubusercontent.com/DataDog/datadog-agent/master/cmd/agent/install_script.sh  | bash -
 
 # Install Node
-RUN curl -sL https://deb.nodesource.com/setup_14.x  | bash -
-RUN apt-get -y install nodejs
-RUN npm install
+#RUN curl -sL https://deb.nodesource.com/setup_14.x  | bash -
+#RUN apt-get -y install nodejs
+#RUN npm install
 
 # Install extensions
-RUN docker-php-ext-install pdo_mysql mbstring zip exif pcntl
-RUN docker-php-ext-configure gd --with-gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ --with-png-dir=/usr/include/
-RUN docker-php-ext-install gd
-RUN docker-php-ext-configure bcmath --enable-bcmath
-RUN docker-php-ext-install bcmath
+#RUN docker-php-ext-install pdo_mysql mbstring zip exif pcntl
+#RUN docker-php-ext-configure gd --with-gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ --with-png-dir=/usr/include/
+#RUN docker-php-ext-install gd
+#RUN docker-php-ext-configure bcmath --enable-bcmath
+#RUN docker-php-ext-install bcmath
 
-RUN apt-get update -y && \
-    apt-get install -y libmcrypt-dev && \
-    pecl install mcrypt-1.0.3 && \
-    docker-php-ext-enable mcrypt
+#RUN apt-get update -y && \
+#    apt-get install -y libmcrypt-dev && \
+#    pecl install mcrypt-1.0.3 && \
+#    docker-php-ext-enable mcrypt
 
 # Get composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
