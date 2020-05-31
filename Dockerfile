@@ -17,7 +17,6 @@ RUN apt-get update && apt-get install -y \
     libpng-dev \
     libzip-dev \
     zlib1g-dev \
-    libjpeg62-turbo-dev \
     libfreetype6-dev \
     locales \
     zip \
@@ -28,6 +27,7 @@ RUN apt-get update && apt-get install -y \
     curl \
     cron
 
+# Install DataDog Agent
 RUN curl -L https://raw.githubusercontent.com/DataDog/datadog-agent/master/cmd/agent/install_script.sh | bash -
 
 # Install Node
@@ -49,8 +49,6 @@ RUN apt-get update -y && \
 
 # Get composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
-
-
 
 # Add user for laravel application
 RUN groupadd -g 1000 www
