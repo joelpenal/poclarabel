@@ -57,17 +57,17 @@ RUN curl -L https://raw.githubusercontent.com/DataDog/datadog-agent/master/cmd/a
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
 # Add user for laravel application
-RUN groupadd -g 1000 www
-RUN useradd -u 1000 -ms /bin/bash -g www www
+#RUN groupadd -g 1000 www
+#RUN useradd -u 1000 -ms /bin/bash -g www www
 
 # Copy existing application directory contents
 COPY . /var/www
 
 # Copy existing application directory permissions
-COPY --chown=www:www . /var/www
+#COPY --chown=www:www . /var/www
 
 # Change current user to www
-USER www
+#USER www
 
 # Expose port 8080 and start server
 CMD php artisan serve --host=0.0.0.0 --port=8080
