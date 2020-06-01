@@ -11,7 +11,8 @@ ENV DOCKER_CONTENT_TRUST=1 \
     DD_LOGS_ENABLED=true \
     DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL=true \
     DD_API_KEY=515a77b256d24b80642bdca4bfbd1185 \
-    DD_INSTALL_ONLY=true 
+    DD_INSTALL_ONLY=true \
+    DD_HOSTNAME="carrieresnprod"
 
 # Install dependencies
 RUN apt-get update && apt-get install -y \
@@ -49,6 +50,9 @@ RUN apt-get update && apt-get install -y \
 #    pecl install mcrypt-1.0.3 && \
 #    docker-php-ext-enable mcrypt
 
+# Install Datadog Agent
+RUN curl -L https://raw.githubusercontent.com/DataDog/datadog-agent/master/cmd/agent/install_script.sh  | bash -
+
 # Get composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
@@ -59,8 +63,7 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
 # Copy existing application directory contents
 COPY . /var/www
 
-# Install Datadog Agent
-#RUN curl -L https://raw.githubusercontent.com/DataDog/datadog-agent/master/cmd/agent/install_script.sh  | bash -
+
 
 # Copy existing application directory permissions
 #COPY --chown=www:www . /var/www
