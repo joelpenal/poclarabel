@@ -60,7 +60,7 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
 COPY . /var/www
 
 # Install Datadog Agent
-RUN curl -L https://raw.githubusercontent.com/DataDog/datadog-agent/master/cmd/agent/install_script.sh  | bash -
+#RUN curl -L https://raw.githubusercontent.com/DataDog/datadog-agent/master/cmd/agent/install_script.sh  | bash -
 
 # Copy existing application directory permissions
 #COPY --chown=www:www . /var/www
