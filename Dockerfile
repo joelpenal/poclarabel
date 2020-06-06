@@ -56,7 +56,7 @@ COPY . /var/www
 #USER www
 
 # Expose port 8080 and start server
-CMD php artisan serve --host=0.0.0.0 --port=8080
+CMD php artisan serve --host=127.0.0.1 --port=8080
 EXPOSE 8080
 
 HEALTHCHECK --interval=12s --timeout=12s --start-period=30s \  
