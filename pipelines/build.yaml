@@ -70,14 +70,3 @@ stages:
         DockerNamespace: 'acrcarrieresnprod001.azurecr.io'
         DockerRepository: '$(imageName)'
         DockerImageTag: '$(Build.BuildNumber)'
-
-    - task: AzureRmWebAppDeployment@4
-      displayName: Deploy App
-      inputs:
-        ConnectionType: 'AzureRM'
-        azureSubscription: 'TechLlamas (edea218b-98bf-47f0-83db-83085239f770)'
-        appType: 'webAppContainer'
-        WebAppName: 'webapp-carrieres-nprod-002'
-        DockerNamespace: 'acrcarrieresnprod001.azurecr.io'
-        DockerRepository: '$(imageName)'
-        DockerImageTag: '$(Build.BuildNumber)'
