@@ -28,35 +28,35 @@ RUN apt-get update && apt-get install -y \
     npm 
 
 # Install extensions
-#RUN docker-php-ext-install pdo_mysql mbstring zip exif pcntl
-#RUN docker-php-ext-configure gd --with-gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ --with-png-dir=/usr/include/
-#RUN docker-php-ext-install gd
-#RUN docker-php-ext-configure bcmath --enable-bcmath
-#RUN docker-php-ext-install bcmath
+RUN docker-php-ext-install pdo_mysql mbstring zip exif pcntl
+RUN docker-php-ext-configure gd --with-gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ --with-png-dir=/usr/include/
+RUN docker-php-ext-install gd
+RUN docker-php-ext-configure bcmath --enable-bcmath
+RUN docker-php-ext-install bcmath
 
-#RUN apt-get update -y && \
-#    apt-get install -y libmcrypt-dev && \
-#    pecl install mcrypt-1.0.3 && \
-#    docker-php-ext-enable mcrypt
-
+RUN apt-get update -y && \
+    apt-get install -y libmcrypt-dev && \
+    pecl install mcrypt-1.0.3 && \
+    docker-php-ext-enable mcrypt
+    
 # Get composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
 # Add user for laravel application
-#RUN groupadd -g 1000 www
-#RUN useradd -u 1000 -ms /bin/bash -g www www
+RUN groupadd -g 1000 www
+RUN useradd -u 1000 -ms /bin/bash -g www www
 
 # Copy existing application directory contents
 COPY . /var/www
 
 # Copy existing application directory permissions
-#COPY --chown=www:www . /var/www
+COPY --chown=www:www . /var/www
 
 # Change current user to www
-#USER www
+USER www
 
 # Expose port 8080 and start server
-CMD php artisan serve --host=127.0.0.1 --port=8080
+CMD php artisan serve --host=0.0.0.0 --port=8080
 EXPOSE 8080
 
 HEALTHCHECK --interval=12s --timeout=12s --start-period=30s \  
