@@ -66,7 +66,7 @@ stages:
         ConnectionType: 'AzureRM'
         azureSubscription: 'TechLlamas (edea218b-98bf-47f0-83db-83085239f770)'
         appType: 'webAppContainer'
-        WebAppName: 'webapp-carrieres-nprod-001'
+        WebAppName: 'wa-carrieres-nprod-001'
         DockerNamespace: 'acrcarrieresnprod001.azurecr.io'
         DockerRepository: '$(imageName)'
         DockerImageTag: '$(Build.BuildNumber)'
